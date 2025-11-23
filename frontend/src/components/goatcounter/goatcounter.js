@@ -1,7 +1,7 @@
 // src/goatcounter.js
 export function loadGoatCounter() {
   // Prevent GoatCounter from loading during development
-  if (process.env.NODE_ENV !== "production") {
+  if (import.meta.env.NODE_ENV !== "production") {
     console.log("GoatCounter disabled in development");
     return;
   }
