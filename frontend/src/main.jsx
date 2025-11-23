@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import {BrowserRouter} from 'react-router-dom'
 import './index.css'
-import RouteTracker from './components/goatcounter/Routetracker.js'
+import RouteTracker from './components/goatcounter/RoutesTracker.js'
 import App from './App.jsx'
 
 createRoot(document.getElementById("root")).render(
