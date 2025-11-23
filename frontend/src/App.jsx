@@ -2,8 +2,7 @@
 import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import { useEffect } from "react";
-import { loadGoatCounter } from "./components/goatcounter/goatcounter.js";
+import Analytics from "./components/Analytics.jsx";
 
 // Component Imports
 import Navbar from './components/Navbar.jsx'
@@ -16,14 +15,11 @@ import Connect from './pages/Connect.jsx'
 
 
 function App() {
-  // Load GoatCounter when the app starts
-  useEffect(() => {
-    loadGoatCounter();
-  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-black">
       <Navbar />
+      <Analytics />
       <main className="grow">
         <Routes>
           <Route path="/" element={<Home />} />
