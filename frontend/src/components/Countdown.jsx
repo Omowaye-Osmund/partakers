@@ -1,90 +1,108 @@
+// Countdown.jsx
 import React, { useState, useEffect } from "react";
 
 function Countdown() {
-  const inauguralDate = new Date("2025-11-09T14:00:00");
-
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-
-  const [hasEnded, setHasEnded] = useState(false);
+  const [serviceStatus, setServiceStatus] = useState(null);
 
   useEffect(() => {
-    const calculateTimeLeft = () => {
-      const now = new Date().getTime();
-      const distance = inauguralDate - now;
+    const checkServiceTime = () => {
+      const now = new Date();
+      const dayOfWeek = now.getDay();
 
-      if (distance < 0) {
-        setHasEnded(true);
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-      } else {
-        setTimeLeft({
-          days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-          hours: Math.floor(
-            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-          ),
-          minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((distance % (1000 * 60)) / 1000),
-        });
+      // Only check on Sundays
+      if (dayOfWeek !== 0) {
+        setServiceStatus(null);
+        return;
       }
+
+      // Calculate which Sunday of the month (1st, 2nd, 3rd, etc)
+      const dayOfMonth = now.getDate();
+      const sundayOfMonth = Math.ceil(dayOfMonth / 7);
+
+      let serviceStart, serviceEnd;
+
+      if (sundayOfMonth === 1) {
+        // First Sunday: Main church service 9am - 12pm
+        serviceStart = new Date(now);
+        serviceStart.setHours(9, 0, 0, 0);
+        serviceEnd = new Date(now);
+        serviceEnd.setHours(12, 0, 0, 0);
+      } else {
+        // Every other Sunday: Youth service 2pm - 4:30pm
+        serviceStart = new Date(now);
+        serviceStart.setHours(14, 0, 0, 0);
+        serviceEnd = new Date(now);
+        serviceEnd.setHours(16, 30, 0, 0);
+      }
+
+      const minutesToService = Math.floor((serviceStart - now) / 60000);
+
+      // Within 1 hour before service
+      if (minutesToService > 0 && minutesToService <= 60) {
+        setServiceStatus({
+          type: "soon",
+          minutes: minutesToService,
+          isMainChurch: sundayOfMonth === 1,
+        });
+        return;
+      }
+
+      // Service is live
+      if (now >= serviceStart && now < serviceEnd) {
+        setServiceStatus({
+          type: "live",
+          isMainChurch: sundayOfMonth === 1,
+        });
+        return;
+      }
+
+      setServiceStatus(null);
     };
 
-    calculateTimeLeft();
-    const timer = setInterval(calculateTimeLeft, 1000);
-
+    checkServiceTime();
+    const timer = setInterval(checkServiceTime, 60000); // Check every minute
     return () => clearInterval(timer);
   }, []);
 
-  // If countdown has ended, show different message
-  if (hasEnded) {
+  // Service starting soon
+  if (serviceStatus?.type === "soon") {
     return (
       <div className="text-center">
-        <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 inline-block">
-          <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
-            Service is Live!
+        <div className="bg-amber-500 backdrop-blur-md border border-amber-400 rounded-2xl p-4 sm:p-6 inline-block animate-pulse">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">
+            Service Starts in {serviceStatus.minutes} Minute
+            {serviceStatus.minutes !== 1 ? "s" : ""}!
           </h3>
-          <p className="text-xl text-blue-100">
-            Join us now for an amazing worship experience
+          <p className="text-base sm:text-lg text-white/90">
+            {serviceStatus.isMainChurch
+              ? "Get ready for main church service"
+              : "Get ready to join us"}
           </p>
         </div>
       </div>
     );
   }
 
-  return (
-    <div className="text-center">
-      <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
-        Inaugural Service Countdown
-      </h3>
-
-      {/* Countdown Cards - Subtle, not too bright */}
-      <div className="flex justify-center gap-4 md:gap-6 mb-6">
-        {[
-          { label: "Days", value: timeLeft.days },
-          { label: "Hours", value: timeLeft.hours },
-          { label: "Minutes", value: timeLeft.minutes },
-          { label: "Seconds", value: timeLeft.seconds },
-        ].map((item, idx) => (
-          <div
-            key={idx}
-            className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 md:p-6 min-w-20 md:min-w-[100px]"
-          >
-            <div className="text-4xl md:text-5xl font-bold text-white mb-2">
-              {String(item.value).padStart(2, "0")}
-            </div>
-            <div className="text-xs md:text-sm text-blue-100 uppercase tracking-wider font-medium">
-              {item.label}
-            </div>
-          </div>
-        ))}
+  // Service is live
+  if (serviceStatus?.type === "live") {
+    return (
+      <div className="text-center">
+        <div className="bg-red-500 backdrop-blur-md border border-red-400 rounded-2xl p-4 sm:p-6 inline-block animate-pulse">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">
+            🔴 Service is LIVE NOW!
+          </h3>
+          <p className="text-base sm:text-lg text-white/90">
+            {serviceStatus.isMainChurch
+              ? "Join us at the main church service"
+              : "Join us for an amazing experience"}
+          </p>
+        </div>
       </div>
+    );
+  }
 
-      <p className="text-lg md:text-xl text-blue-100">November 9th, 2025</p>
-    </div>
-  );
+  // No service info to display
+  return null;
 }
 
 export default Countdown;
