@@ -77,7 +77,7 @@ function About() {
               Our Purpose Statement
             </h2>
             <p className="text-lg sm:text-xl text-gray-600">
-              Discipling people to be:
+              For all to be:
             </p>
           </div>
 
@@ -108,7 +108,7 @@ function About() {
           <div className="mt-8 sm:mt-10 text-center">
             <div className="inline-block bg-linear-to-r from-blue-600 to-indigo-600 rounded-xl px-6 sm:px-8 py-4 sm:py-5">
               <p className="text-lg sm:text-xl text-white font-bold">
-                So they can represent Christ on Earth
+                So we can represent Christ on Earth
               </p>
             </div>
           </div>
