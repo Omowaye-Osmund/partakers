@@ -67,7 +67,7 @@ function About() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-8 sm:mb-10">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#1F1591] mb-3" style={fontLeague}>What We're Called To Be</h2>
-            <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto" style={fontQuicksand}>Discipling young believers to become:</p>
+            <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto" style={fontQuicksand}>Discipling all believers to become:</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -85,7 +85,7 @@ function About() {
 
           <div className="mt-8 text-center">
             <div className="inline-block bg-gradient-to-r from-[#1F1591] to-[#742F8D] rounded-lg px-6 py-3">
-              <p className="text-base sm:text-lg text-white font-bold" style={fontLeague}>Equipped to represent Christ on Earth</p>
+              <p className="text-base sm:text-lg text-white font-bold" style={fontLeague}>To represent Christ on Earth</p>
             </div>
           </div>
         </div>
