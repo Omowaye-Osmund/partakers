@@ -2,31 +2,42 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Countdown from "../components/Countdown";
 
+// Import hero slides
+import service1 from "../assets/home/service1.jpg";
+import service2 from "../assets/home/service2.jpg";
+import service3 from "../assets/home/service3.jpg";
+import service4 from "../assets/home/service4.jpg";
+import service5 from "../assets/home/service5.jpg";
+
+// Import Who We Are images
+import lovingSelflessly from "../assets/home/loving-selflessly.jpeg";
+import pursuingExcellence from "../assets/home/pursuing_excellence.jpeg";
+
+// Import What We Do images
+import spreadingGospel from "../assets/home/spreading_the_gospel.jpeg";
+import discipling from "../assets/home/discipling.jpeg";
+import disciplingOthers from "../assets/home/discipling_others.jpeg";
+import servingCommunity from "../assets/home/serving_the_community.jpeg";
+
 function Home() {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentService, setCurrentService] = useState(null);
 
-  const slides = [
-    "../assets/home/service1.jpg",
-    "../assets/home/service2.jpg",
-    "../assets/home/service3.jpg",
-    "../assets/home/service4.jpg",
-    "../assets/home/service5.jpg",
-  ];
+  const slides = [service1, service2, service3, service4, service5];
 
   const whoWeAreItems = [
     {
       title: "Loving Selflessly",
       desc: "Known by our deep, selfless love for others through actions, not just words.",
       verse: "John 13:35",
-      image: "/src/assets/home/loving-selflessly.jpeg",
+      image: lovingSelflessly,
     },
     {
       title: "Pursuing Excellence",
       desc: "Striving for excellence in everything we do, representing Christ on Earth.",
       verse: "Ecclesiastes 9:10",
-      image: "/src/assets/home/pursuing_excellence.jpeg",
+      image: pursuingExcellence,
     },
   ];
 
@@ -34,22 +45,22 @@ function Home() {
     {
       title: "Spreading the Gospel",
       desc: "Sharing the good news of Christ with our community and beyond",
-      image: "/src/assets/home/spreading_the_gospel.jpeg",
+      image: spreadingGospel,
     },
     {
       title: "Discipling Others",
       desc: "Growing together in faith and knowledge",
-      image: "/src/assets/home/discipling.jpeg",
+      image: discipling,
     },
     {
       title: "Shining Our Light",
       desc: "Being examples of Christ's love in everything we do",
-      image: "/src/assets/home/discipling_others.jpeg",
+      image: disciplingOthers,
     },
     {
       title: "Serving Community",
       desc: "Making a positive impact through acts of service to our community",
-      image: "/src/assets/home/serving_the_community.jpeg",
+      image: servingCommunity,
     },
   ];
 
@@ -57,8 +68,8 @@ function Home() {
     const now = new Date();
     const sundayOfMonth = Math.ceil(now.getDate() / 7);
     setCurrentService({
-      time: sundayOfMonth === 1 ? "3:00 PM - 5:00 PM" : "2:00 PM - 4:30 PM",
-      type: sundayOfMonth === 1 ? "First Sunday" : "Regular Sunday",
+      time: "2:00 PM - 4:30 PM",
+      type: "Every Sunday",
     });
 
     const timer = setInterval(
