@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import partakersLogo from "../assets/home/partakers-logo.png";
+import rccgLogo from "../assets/home/rccg_logo.png";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,27 +22,27 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-black border-b border-[#91772F]/30 sticky top-0 z-50 backdrop-blur-sm">
+    <nav className="bg-[#0a0a0a] border-b border-[#91772F]/30 sticky top-0 z-50 backdrop-blur-sm shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center h-20 sm:h-24">
-
-          {/* Logo ONLY */}
-          <Link
-            to="/"
-            className="flex items-center group"
-          >
+          {/* Logos - Same size, properly aligned, pushed left */}
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 group -ml-2">
+            {/* Partakers Logo - Make it bigger by using larger h-values */}
             <img
               src={partakersLogo}
               alt="Partakers Logo"
-              className="
-                h-14 sm:h-16 md:h-18 lg:h-20
-                w-auto object-contain
-                group-hover:scale-105
-                transition-transform duration-300
-              "
+              className="mb-8 h-20 sm:h-24 md:h-28 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+            />
+
+            <div className="mr-10 h-16 sm:h-20 w-px bg-[#91772F]/40"></div>
+
+            {/* RCCG Logo - Keep normal size */}
+            <img
+              src={rccgLogo}
+              alt="RCCG Logo"
+              className="h-14 sm:h-16 md:h-18 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
             />
           </Link>
-
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {navItems.map((item) => (
@@ -58,9 +59,7 @@ function Navbar() {
                 {item.label}
                 <span
                   className={`absolute -bottom-1 left-0 h-0.5 bg-[#91772F] transition-all duration-300 ${
-                    isActive(item.path)
-                      ? "w-full"
-                      : "w-0 group-hover:w-full"
+                    isActive(item.path) ? "w-full" : "w-0 group-hover:w-full"
                   }`}
                 />
               </Link>
