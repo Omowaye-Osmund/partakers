@@ -8,11 +8,11 @@ function Home() {
   const [currentService, setCurrentService] = useState(null);
 
   const slides = [
-    "/assets/home/service1.jpg",
-    "/assets/home/service2.jpg",
-    "/assets/home/service3.jpg",
-    "/assets/home/service4.jpg",
-    "/assets/home/service5.jpg",
+    "../assets/home/service1.jpg",
+    "../assets/home/service2.jpg",
+    "../assets/home/service3.jpg",
+    "../assets/home/service4.jpg",
+    "../assets/home/service5.jpg",
   ];
 
   const whoWeAreItems = [
