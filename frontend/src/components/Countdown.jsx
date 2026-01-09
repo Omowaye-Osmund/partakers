@@ -1,4 +1,3 @@
-// Countdown.jsx
 import React, { useState, useEffect } from "react";
 
 function Countdown() {
@@ -9,53 +8,39 @@ function Countdown() {
       const now = new Date();
       const dayOfWeek = now.getDay();
 
-      // Only check on Sundays
+      // Only show countdown on Sundays
       if (dayOfWeek !== 0) {
         setServiceStatus(null);
         return;
       }
 
-      // Calculate which Sunday of the month (1st, 2nd, 3rd, etc)
-      const dayOfMonth = now.getDate();
-      const sundayOfMonth = Math.ceil(dayOfMonth / 7);
+      // Service is every Sunday 2:00 PM - 4:30 PM
+      const serviceStart = new Date(now);
+      serviceStart.setHours(14, 0, 0, 0); // 2:00 PM
 
-      let serviceStart, serviceEnd;
-
-      if (sundayOfMonth === 1) {
-        // First Sunday: Main church service 9am - 12pm
-        serviceStart = new Date(now);
-        serviceStart.setHours(9, 0, 0, 0);
-        serviceEnd = new Date(now);
-        serviceEnd.setHours(12, 0, 0, 0);
-      } else {
-        // Every other Sunday: Youth service 2pm - 4:30pm
-        serviceStart = new Date(now);
-        serviceStart.setHours(14, 0, 0, 0);
-        serviceEnd = new Date(now);
-        serviceEnd.setHours(16, 30, 0, 0);
-      }
+      const serviceEnd = new Date(now);
+      serviceEnd.setHours(16, 30, 0, 0); // 4:30 PM
 
       const minutesToService = Math.floor((serviceStart - now) / 60000);
 
-      // Within 1 hour before service
+      // Show "Starting Soon" 60 minutes before service (1:00 PM - 2:00 PM)
       if (minutesToService > 0 && minutesToService <= 60) {
         setServiceStatus({
           type: "soon",
           minutes: minutesToService,
-          isMainChurch: sundayOfMonth === 1,
         });
         return;
       }
 
-      // Service is live
+      // Show "Live Now" during service (2:00 PM - 4:30 PM)
       if (now >= serviceStart && now < serviceEnd) {
         setServiceStatus({
           type: "live",
-          isMainChurch: sundayOfMonth === 1,
         });
         return;
       }
 
+      // Hide outside these windows
       setServiceStatus(null);
     };
 
@@ -64,44 +49,55 @@ function Countdown() {
     return () => clearInterval(timer);
   }, []);
 
-  // Service starting soon
+  const fontLeague = { fontFamily: "'League Spartan', sans-serif" };
+  const fontQuicksand = { fontFamily: "'Quicksand', sans-serif" };
+
+  // Starting Soon State (Gold/Bronze box)
   if (serviceStatus?.type === "soon") {
     return (
       <div className="text-center">
-        <div className="bg-amber-500 backdrop-blur-md border border-amber-400 rounded-2xl p-4 sm:p-6 inline-block animate-pulse">
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">
+        <div className="bg-[#91772F] backdrop-blur-md border-2 border-[#E4CFB2] rounded-2xl p-3 sm:p-4 inline-block animate-pulse shadow-2xl">
+          <h3
+            className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-1"
+            style={fontLeague}
+          >
             Service Starts in {serviceStatus.minutes} Minute
             {serviceStatus.minutes !== 1 ? "s" : ""}!
           </h3>
-          <p className="text-base sm:text-lg text-white/90">
-            {serviceStatus.isMainChurch
-              ? "Get ready for main church service"
-              : "Get ready to join us"}
+          <p
+            className="text-sm sm:text-base text-white/95"
+            style={fontQuicksand}
+          >
+            Get ready to join us
           </p>
         </div>
       </div>
     );
   }
 
-  // Service is live
+  // Live Now State (Purple box)
   if (serviceStatus?.type === "live") {
     return (
       <div className="text-center">
-        <div className="bg-red-500 backdrop-blur-md border border-red-400 rounded-2xl p-4 sm:p-6 inline-block animate-pulse">
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">
+        <div className="bg-[#742F8D] backdrop-blur-md border-2 border-[#91772F] rounded-2xl p-3 sm:p-4 inline-block animate-pulse shadow-2xl">
+          <h3
+            className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-1"
+            style={fontLeague}
+          >
             🔴 Service is LIVE NOW!
           </h3>
-          <p className="text-base sm:text-lg text-white/90">
-            {serviceStatus.isMainChurch
-              ? "Join us at the main church service"
-              : "Join us for an amazing experience"}
+          <p
+            className="text-sm sm:text-base text-white/95"
+            style={fontQuicksand}
+          >
+            Join us for an amazing experience
           </p>
         </div>
       </div>
     );
   }
 
-  // No service info to display
+  // Hidden State (returns nothing)
   return null;
 }
 

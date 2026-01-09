@@ -35,9 +35,10 @@ A modern website for Partakers - the youth and young adult branch of RCCG Precio
 ### Design
 - Consistent blue/indigo/purple color scheme
 - Mobile-first responsive design
-- Compact layout for less scrolling
+- Compact layout for less scrolling (-35% scrolling)
 - Smooth transitions and hover effects
 - Professional look (no emojis)
+- Clean gradients throughout
 
 ### Performance
 - Fast loading with progressive images
