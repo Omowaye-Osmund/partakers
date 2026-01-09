@@ -72,7 +72,14 @@ function Footer() {
                 className="block text-gray-600 hover:text-[#91772F] transition-colors duration-200 text-xs sm:text-sm"
                 style={{ fontFamily: "'Quicksand', sans-serif" }}
               >
-                Connect
+                Connect with us
+              </Link>
+                            <Link
+                to="/contact-us"
+                className="block text-gray-600 hover:text-[#91772F] transition-colors duration-200 text-xs sm:text-sm"
+                style={{ fontFamily: "'Quicksand', sans-serif" }}
+              >
+                Contact us
               </Link>
             </div>
           </div>
@@ -80,15 +87,11 @@ function Footer() {
           {/* Service Times */}
           <div className="text-center sm:text-left">
             <h4 className="text-xs sm:text-sm font-bold text-gray-900 mb-3 sm:mb-4 uppercase tracking-wide" style={{ fontFamily: "'League Spartan', sans-serif" }}>
-              Service Times
+              Service Time
             </h4>
             <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm" style={{ fontFamily: "'Quicksand', sans-serif" }}>
               <div>
-                <p className="font-semibold text-gray-700">First Sunday</p>
-                <p className="text-gray-600">3:00 PM - 5:00 PM</p>
-              </div>
-              <div>
-                <p className="font-semibold text-gray-700">Other Sundays</p>
+                <p className="font-semibold text-gray-700">Every Sunday</p>
                 <p className="text-gray-600">2:00 PM - 4:30 PM</p>
               </div>
             </div>
