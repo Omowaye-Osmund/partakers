@@ -65,21 +65,21 @@ function Footer() {
                 className="block text-gray-600 hover:text-[#91772F] transition-colors duration-200 text-xs sm:text-sm"
                 style={{ fontFamily: "'Quicksand', sans-serif" }}
               >
-                About Us
+                Who We Are
               </Link>
               <Link
                 to="/connect"
                 className="block text-gray-600 hover:text-[#91772F] transition-colors duration-200 text-xs sm:text-sm"
                 style={{ fontFamily: "'Quicksand', sans-serif" }}
               >
-                Connect with us
+                Visit Us
               </Link>
                             <Link
                 to="/contact-us"
                 className="block text-gray-600 hover:text-[#91772F] transition-colors duration-200 text-xs sm:text-sm"
                 style={{ fontFamily: "'Quicksand', sans-serif" }}
               >
-                Contact us
+              Get In Touch
               </Link>
             </div>
           </div>
