@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import partakersLogo from "../assets/home/partakers-logo.png";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
+  const fontQuicksand = { fontFamily: "'Quicksand', sans-serif" };
+
   const navItems = [
     { path: "/", label: "Home" },
-    { path: "/about", label: "About" },
-    { path: "/connect", label: "Connect" },
+    { path: "/about", label: "Who We Are" },
+    { path: "/connect", label: "Visit Us" },
+    { path: "/contact-us", label: "Get In Touch" },
   ];
 
   const isActive = (path) => {
@@ -17,40 +21,60 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-black border-b border-[#8B7355] sticky top-0 z-50 backdrop-blur-sm ">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
-            <div className="text-2xl md:text-3xl font-bold text-[#8B7355] tracking-wider hover:text-[#A0826D] transition">
-              PARTAKERS
-            </div>
+    <nav className="bg-black border-b border-[#91772F]/30 sticky top-0 z-50 backdrop-blur-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="flex justify-between items-center h-20 sm:h-24">
+
+          {/* Logo ONLY */}
+          <Link
+            to="/"
+            className="flex items-center group"
+          >
+            <img
+              src={partakersLogo}
+              alt="Partakers Logo"
+              className="
+                h-14 sm:h-16 md:h-18 lg:h-20
+                w-auto object-contain
+                group-hover:scale-105
+                transition-transform duration-300
+              "
+            />
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex space-x-8">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-white hover:text-[#8B7355] transition font-medium text-lg ${
+                className={`text-sm lg:text-base font-semibold transition-colors duration-300 relative group ${
                   isActive(item.path)
-                    ? "text-[#8B7355] border-b-2 border-[#8B7355]"
-                    : ""
+                    ? "text-[#91772F]"
+                    : "text-white hover:text-[#91772F]"
                 }`}
+                style={fontQuicksand}
               >
                 {item.label}
+                <span
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-[#91772F] transition-all duration-300 ${
+                    isActive(item.path)
+                      ? "w-full"
+                      : "w-0 group-hover:w-full"
+                  }`}
+                />
               </Link>
             ))}
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-[#8B7355]"
+            className="md:hidden p-2 text-[#91772F] hover:text-[#A0826D] transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
             <svg
-              className="w-7 h-7"
+              className="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -76,19 +100,24 @@ function Navbar() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden pb-4 space-y-3">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setIsMenuOpen(false)}
-                className={`block py-2 text-white hover:text-[#8B7355] transition text-lg ${
-                  isActive(item.path) ? "text-[#8B7355] font-semibold" : ""
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+          <div className="md:hidden pb-4 pt-2 border-t border-[#91772F]/30">
+            <div className="space-y-1">
+              {navItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`block py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
+                    isActive(item.path)
+                      ? "text-[#91772F] bg-[#91772F]/10"
+                      : "text-white hover:text-[#91772F] hover:bg-white/5"
+                  }`}
+                  style={fontQuicksand}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
           </div>
         )}
       </div>
