@@ -12,6 +12,7 @@ import Countdown from './components/Countdown.jsx'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Connect from './pages/Connect.jsx'
+import ContactUs from './pages/ContactUs.jsx';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/connect" element={<Connect />} />
+          <Route path="/contact-us" element={<ContactUs />} />
         </Routes>
       </main>
       <Footer />
