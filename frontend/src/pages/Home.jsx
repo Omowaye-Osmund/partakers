@@ -32,12 +32,16 @@ function Home() {
       desc: "Known by our deep, selfless love for others through actions, not just words.",
       verse: "John 13:35",
       image: lovingSelflessly,
+      verseText:
+        "By this everyone will know that you are my disciples, if you love one another.",
     },
     {
       title: "Pursuing Excellence",
       desc: "Striving for excellence in everything we do, representing Christ on Earth.",
-      verse: "Ecclesiastes 9:10",
+      verse: "Colossians 3:23",
       image: pursuingExcellence,
+      verseText:
+        "Whatever you do, work at it with all your heart, as working for the Lord, not for human beings.",
     },
   ];
 
@@ -291,12 +295,18 @@ function Home() {
                   >
                     {item.desc}
                   </p>
-                  <div className="inline-block bg-[#E4CFB2] px-3 py-1.5 rounded-lg">
+                  <div className="bg-[#E4CFB2]/50 border-l-4 border-[#91772F] p-3 rounded-lg">
                     <p
-                      className="text-[#742F8D] font-bold text-xs sm:text-sm"
+                      className="text-[#742F8D] font-bold text-xs mb-1"
                       style={fontQuicksand}
                     >
-                      {item.verse}
+                      {item.verse} (NIV)
+                    </p>
+                    <p
+                      className="text-gray-700 text-xs sm:text-sm leading-relaxed italic"
+                      style={fontQuicksand}
+                    >
+                      "{item.verseText}"
                     </p>
                   </div>
                 </div>
