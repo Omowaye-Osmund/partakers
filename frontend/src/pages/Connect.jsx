@@ -666,7 +666,7 @@ function Connect() {
           </p>
           <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center">
             <button
-              onClick={() => navigate("/contact")}
+              onClick={() => navigate("/contact-us")}
               className="bg-[#91772F] text-white hover:bg-[#91772F]/90 px-6 sm:px-7 py-2.5 rounded-full font-bold text-sm sm:text-base transition-all duration-300 hover:scale-105 shadow-lg"
               style={fontQuicksand}
             >
