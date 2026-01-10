@@ -2,6 +2,8 @@
 import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
+import Analytics from "./components/Analytics.jsx";
+
 // Component Imports
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
@@ -10,23 +12,26 @@ import Countdown from './components/Countdown.jsx'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Connect from './pages/Connect.jsx'
+import ContactUs from './pages/ContactUs.jsx';
 
 
 function App() {
 
   return (
-    <div className='min-h-screen flex flex-col bg-black'>
+    <div className="min-h-screen flex flex-col bg-black">
       <Navbar />
-      <main className='grow'>
+      <Analytics />
+      <main className="grow">
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/connect' element={<Connect />} />
-</Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/connect" element={<Connect />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+        </Routes>
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 
 export default App

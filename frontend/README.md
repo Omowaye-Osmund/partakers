@@ -1,16 +1,76 @@
-# React + Vite
+# Partakers Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern website for Partakers - the youth and young adult branch of RCCG Precious People Parish in Manchester.
 
-Currently, two official plugins are available:
+**Live Site:** [partakersmanchester.com](https://partakersmanchester.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tech Stack
 
-## React Compiler
+- React 18 + Vite
+- Tailwind CSS
+- React Router
+- Cloudinary (images)
+- Render (hosting)
+- GoatCounter (analytics)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+### Hero Section
+- Auto-rotating image slideshow (5 service photos)
+- Cloudinary CDN for optimized loading
+- Progressive image loading with gradient fallback
+- Responsive design for all devices
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Smart Service Tracking
+- Real-time countdown component
+- "Service starting in X minutes" alert (1 hour before)
+- "Service is LIVE NOW" indicator during service
+- Handles first Sunday (main church 9am-12pm) and other Sundays (youth 2pm-4:30pm)
+
+### Pages
+- **Home:** Hero, Who We Are, What We Do, CTA
+- **About:** Mission, purpose, values, identity
+- **Connect:** Service times, location, contact form
+
+### Design
+- Consistent blue/indigo/purple color scheme
+- Mobile-first responsive design
+- Compact layout for less scrolling (-35% scrolling)
+- Smooth transitions and hover effects
+- Professional look (no emojis)
+- Clean gradients throughout
+
+### Performance
+- Fast loading with progressive images
+- Instant page display (no loading spinner)
+- Optimized bundle size
+- Cloudinary auto-optimization (WebP, quality)
+
+### Analytics
+- GoatCounter integration (privacy-focused)
+- Page view tracking
+- SPA navigation tracking
+- GDPR compliant (no cookies)
+
+## 🚀 Quick Start
+```bash
+# Install
+cd frontend
+npm install
+
+# Dev
+npm run dev
+
+# Build
+npm run build
+```
+
+## 🌐 Deployment
+
+- **Hosting:** Render (Static Site)
+- **Domain:** Namecheap DNS
+- **Auto-deploy:** On push to `main`
+
+---
+
+**Built for the Partakers community** 🙏
