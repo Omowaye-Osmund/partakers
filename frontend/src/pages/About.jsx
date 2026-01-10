@@ -42,6 +42,8 @@ function About() {
       description:
         "Love is our identity. We're known by how we show up for each other, serve our community, and extend grace. Our actions speak louder than words.",
       scripture: "John 13:35",
+      verseText:
+        "By this everyone will know that you are my disciples, if you love one another.",
       image: lovingSelflesslyImg,
       imageAlt: "People showing love and care to one another",
     },
@@ -50,6 +52,8 @@ function About() {
       description:
         "We bring our best to everything we do. Whether it's worship, service, or relationships, we aim for excellence because we represent Christ.",
       scripture: "Colossians 3:23",
+      verseText:
+        "Whatever you do, work at it with all your heart, as working for the Lord, not for human beings.",
       image: excellenceImg,
       imageAlt: "People working with excellence and dedication",
     },
@@ -58,6 +62,8 @@ function About() {
       description:
         "We're proud members of the Redeemed Christian Church of God, submitted under the spiritual authority of our mother church, Precious People Parish. We walk in godly alignment, accountability, and the blessing that comes from honoring spiritual covering.",
       scripture: "Hebrews 13:17",
+      verseText:
+        "Have confidence in your leaders and submit to their authority, because they keep watch over you as those who must give an account. Do this so that their work will be a joy, not a burden, for that would be of no benefit to you.",
       image: ugcImg,
       imageAlt: "Church community together in unity",
     },
@@ -215,12 +221,18 @@ function About() {
                     >
                       {value.description}
                     </p>
-                    <div className="bg-[#E4CFB2] px-4 py-3 rounded-lg border-l-4 border-[#91772F]">
+                    <div className="bg-[#E4CFB2]/50 border-l-4 border-[#91772F] p-4 rounded-lg">
                       <p
-                        className="text-[#742F8D] font-semibold text-xs sm:text-sm"
+                        className="text-[#742F8D] font-bold text-xs sm:text-sm mb-2"
                         style={fontQuicksand}
                       >
-                        {value.scripture}
+                        {value.scripture} (NIV)
+                      </p>
+                      <p
+                        className="text-gray-700 text-xs sm:text-sm leading-relaxed italic"
+                        style={fontQuicksand}
+                      >
+                        "{value.verseText}"
                       </p>
                     </div>
                   </div>
