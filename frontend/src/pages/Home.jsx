@@ -48,22 +48,22 @@ function Home() {
   const whatWeDoItems = [
     {
       title: "Spreading the Gospel",
-      desc: "Sharing the good news of Christ with our community and beyond",
+      desc: "Sharing the good news of Christ with our community and beyond.",
       image: spreadingGospel,
     },
     {
       title: "Discipling Others",
-      desc: "Growing together in faith and knowledge",
+      desc: "Growing together in faith and knowledge.",
       image: discipling,
     },
     {
       title: "Shining Our Light",
-      desc: "Being examples of Christ's love in everything we do",
+      desc: "Being examples of Christ's love in everything we do.",
       image: disciplingOthers,
     },
     {
       title: "Serving Community",
-      desc: "Making a positive impact through acts of service to our community",
+      desc: "Making a positive impact through acts of service to our community.",
       image: servingCommunity,
     },
   ];
