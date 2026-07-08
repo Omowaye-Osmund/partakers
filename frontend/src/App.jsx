@@ -13,6 +13,7 @@ import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Connect from './pages/Connect.jsx'
 import ContactUs from './pages/ContactUs.jsx';
+import SportsDay from './pages/events/SportsDay.jsx';
 
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/connect" element={<Connect />} />
-          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/events/sports-day" element={<SportsDay />} />
         </Routes>
       </main>
       <Footer />
