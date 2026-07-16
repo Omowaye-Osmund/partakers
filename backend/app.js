@@ -1,12 +1,33 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
+
+// --- MongoDB Connection ---
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("✓ MongoDB connected"))
+  .catch((err) => console.error("✗ MongoDB connection error:", err));
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// --- Sports Day Signup Schema ---
+const signupSchema = new mongoose.Schema({
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: { type: String, required: true },
+  gender: { type: String, required: true },
+  activities: { type: [String], required: true },
+  medical: { type: String, default: "" },
+  submittedAt: { type: Date, default: Date.now },
+});
+
+const Signup = mongoose.model("Signup", signupSchema);
 
 // Using church email to send to itself
 const transporter = nodemailer.createTransport({
@@ -216,6 +237,122 @@ app.post("/api/prayer-request", async (req, res) => {
   } catch (error) {
     console.error("Error sending email:", error);
     res.status(500).json({ error: "Failed to send prayer request" });
+  }
+});
+
+// =========================================
+// SPORTS DAY SIGNUP
+// =========================================
+app.post("/api/sports-day-rsvp", async (req, res) => {
+  const { people } = req.body;
+
+  if (!Array.isArray(people) || people.length === 0) {
+    return res.status(400).json({ success: false, message: "No signup data provided" });
+  }
+
+  for (const p of people) {
+    if (!p.firstName || !p.lastName || !p.email || !p.phone || !p.gender || !p.activities?.length) {
+      return res.status(400).json({ success: false, message: "Missing required fields" });
+    }
+  }
+
+  try {
+    // Save to MongoDB
+    await Signup.insertMany(people);
+
+    // Build styled email cards for each person
+    const peopleHtml = people
+      .map(
+        (p, idx) => `
+        <div style="background:#f9f9f9; border-left:4px solid #91772F; padding:18px; border-radius:8px; margin-bottom:14px;">
+          <p style="margin:0 0 10px; color:#1F1591; font-size:16px; font-weight:bold;">
+            Person ${idx + 1}: ${p.firstName} ${p.lastName}
+          </p>
+          <table style="width:100%; border-collapse:collapse; font-size:14px; color:#333;">
+            <tr>
+              <td style="padding:4px 0; font-weight:bold; width:130px;">Email</td>
+              <td style="padding:4px 0;"><a href="mailto:${p.email}" style="color:#1F1591; text-decoration:none;">${p.email}</a></td>
+            </tr>
+            <tr>
+              <td style="padding:4px 0; font-weight:bold;">Phone</td>
+              <td style="padding:4px 0;">${p.phone}</td>
+            </tr>
+            <tr>
+              <td style="padding:4px 0; font-weight:bold;">Gender</td>
+              <td style="padding:4px 0;">${p.gender}</td>
+            </tr>
+            <tr>
+              <td style="padding:4px 0; font-weight:bold; vertical-align:top;">Activities</td>
+              <td style="padding:4px 0;">${p.activities.join(", ")}</td>
+            </tr>
+            <tr>
+              <td style="padding:4px 0; font-weight:bold; vertical-align:top;">Medical</td>
+              <td style="padding:4px 0;">${p.medical || "None"}</td>
+            </tr>
+          </table>
+        </div>
+      `
+      )
+      .join("");
+
+    const mailOptions = {
+      from: `"Partakers Sports Day" <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_USER,
+      subject: `🏃 Sports Day Sign Up - ${people[0].firstName} ${people[0].lastName}${
+        people.length > 1 ? ` +${people.length - 1} more` : ""
+      }`,
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:0; background-color:#f5f5f5; }
+            .container { max-width:600px; margin:20px auto; background:white; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
+            .header { background:linear-gradient(135deg, #1F1591 0%, #742F8D 50%, #1D4C80 100%); color:white; padding:30px 20px; text-align:center; }
+            .header h1 { margin:0; font-size:22px; font-weight:bold; }
+            .header p { margin:8px 0 0; opacity:0.9; font-size:14px; }
+            .content { padding:25px; }
+            .summary { background:#E4CFB2; padding:12px 16px; border-radius:6px; font-size:14px; color:#5C4A1A; margin-bottom:20px; font-weight:600; }
+            .footer { text-align:center; color:#666; font-size:12px; padding:20px; background:#f9f9f9; border-top:1px solid #eee; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>🏃 New Sports Day Sign Up</h1>
+              <p>Received from Partakers Manchester Website</p>
+            </div>
+            <div class="content">
+              <div class="summary">
+                ${people.length} ${people.length === 1 ? "person has" : "people have"} signed up
+              </div>
+              ${peopleHtml}
+            </div>
+            <div class="footer">
+              <p>This sign up was submitted through the Partakers Manchester website</p>
+            </div>
+          </div>
+        </body>
+        </html>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    res.status(200).json({ success: true, message: "Sign up received successfully" });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ success: false, message: "Failed to process sign up" });
+  }
+});
+
+// View all signups (protect this route in production!)
+app.get("/api/sports-day-rsvp", async (req, res) => {
+  try {
+    const all = await Signup.find().sort({ submittedAt: -1 });
+    res.json(all);
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Failed to fetch signups" });
   }
 });
 
