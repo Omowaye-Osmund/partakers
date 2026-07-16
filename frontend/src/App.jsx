@@ -13,12 +13,16 @@ import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Connect from './pages/Connect.jsx'
 import ContactUs from './pages/ContactUs.jsx';
+import SportsDay from './pages/events/SportsDay.jsx';
+import EventsPage from './pages/events/EventsPage.jsx';
+import AnnouncementBar from './components/AnnouncementBar.jsx';
 
 
 function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-black">
+      <AnnouncementBar />
       <Navbar />
       <Analytics />
       <main className="grow">
@@ -26,7 +30,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/connect" element={<Connect />} />
-          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/events/sports-day" element={<SportsDay />} />
+          <Route path="/events" element={<EventsPage />} />
         </Routes>
       </main>
       <Footer />
