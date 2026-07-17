@@ -3,6 +3,15 @@
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Quicksand:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
+/* Prevent iOS/Android auto-zoom on input focus by keeping form fields at 16px minimum */
+@media (max-width: 767px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
 * {
   font-family: 'Quicksand', sans-serif;
 }
