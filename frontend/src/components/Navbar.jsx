@@ -13,7 +13,7 @@ function Navbar() {
     { path: "/", label: "Home" },
     { path: "/about", label: "Who We Are" },
     { path: "/connect", label: "Visit Us" },
-    { path: "/contact-us", label: "Get In Touch" },
+    { path: "/contact", label: "Get In Touch" },
   ];
 
   const isActive = (path) => {
