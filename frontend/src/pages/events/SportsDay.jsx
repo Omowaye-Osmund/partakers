@@ -23,7 +23,7 @@ function SportsDay() {
     title: "Sports Day",
     tagline: "Our First Ever Partakers Sports Day!",
     date: "Saturday, July 25th, 2026", // 🔧 update
-    time: "11:00 AM - 5:30 PM", // 🔧 confirm/update
+    time: "12:45 AM - 4:00 PM", // 🔧 confirm/update
     location: "Cleavley Athletics Track",
     address: "Winton, Blantyre St, Eccles, Manchester M30 8HY",
     mapsUrl: "https://share.google/uReexCLeARwnV3EPa",
@@ -103,15 +103,15 @@ const toggleActivity = (index, activity) => {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 15000); // fail fast instead of hanging forever
 
-      const response = await fetch(
-        "http://localhost:5000/api/sports-day-rsvp",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ people }),
-          signal: controller.signal,
-        },
-      );
+const response = await fetch(
+  `${import.meta.env.VITE_API_URL}/api/sports-day-rsvp`,
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ people }),
+    signal: controller.signal,
+  },
+);
 
       clearTimeout(timeoutId);
 
