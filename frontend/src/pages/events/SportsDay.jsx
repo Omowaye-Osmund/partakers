@@ -101,7 +101,7 @@ const toggleActivity = (index, activity) => {
 
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 15000); // fail fast instead of hanging forever
+    const timeoutId = setTimeout(() => controller.abort(), 51000); // 51s instead of 15s
 
 const response = await fetch(
   `${import.meta.env.VITE_API_URL}/api/sports-day-rsvp`,
@@ -556,7 +556,7 @@ const response = await fetch(
                 style={fontQuicksand}
               >
                 {submitStatus === "sending"
-                  ? "Submitting..."
+                  ? "Submitting... this may take a moment"
                   : submitStatus === "sent"
                     ? "Sign Up Received! ✓"
                     : "Proceed »"}
