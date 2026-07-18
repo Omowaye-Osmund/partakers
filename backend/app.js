@@ -15,6 +15,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(
+  cors({
+    origin: "https://partakersmanchester.com", // your real frontend domain
+  }),
+);
+
 // --- Sports Day Signup Schema ---
 const signupSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
