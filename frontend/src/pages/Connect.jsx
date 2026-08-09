@@ -493,7 +493,7 @@ function Connect() {
                 className="text-3xl sm:text-4xl font-black text-gray-900"
                 style={fontLeague}
               >
-                2:00 PM
+                2:30 PM
               </span>
               <span className="text-xl text-gray-600">—</span>
               <span
