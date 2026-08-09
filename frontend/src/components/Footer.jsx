@@ -102,7 +102,7 @@ function Footer() {
         <div className="border-t border-gray-200 pt-5 sm:pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
           {/* Copyright */}
           <p className="text-gray-500 text-[10px] sm:text-xs text-center sm:text-left order-2 sm:order-1" style={{ fontFamily: "'Quicksand', sans-serif" }}>
-            © 2025 Partakers. All rights reserved.
+            © 2026 Partakers. All rights reserved.
           </p>
 
           {/* Social Icons */}
