@@ -72,7 +72,7 @@ function Home() {
     const now = new Date();
     const sundayOfMonth = Math.ceil(now.getDate() / 7);
     setCurrentService({
-      time: "2:00 PM - 4:30 PM",
+      time: "2:30 PM - 4:30 PM",
       type: "Every Sunday",
     });
 
