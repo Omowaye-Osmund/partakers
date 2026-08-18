@@ -21,13 +21,16 @@ function ContactUs() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/prayer-request", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/prayer-request`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(prayerRequest),
         },
-        body: JSON.stringify(prayerRequest),
-      });
+      );
 
       if (response.ok) {
         setSubmitStatus("sent");
